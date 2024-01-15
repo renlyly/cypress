@@ -29,5 +29,5 @@ Description: CYPRESS is an Cell Type specific power tool. This package aims to
 Encoding: UTF-8
 LazyData: FALSE
 VignetteBuilder: knitr
-URL: https://github.com/test
-BugReports: https://github.com/test
+URL: https://github.com/renlyly/cypress
+BugReports: https://github.com/renlyly/cypress/issues
