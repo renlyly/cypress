@@ -1,34 +1,11 @@
+cypress.Rproj
+.rproj
+cypress.rproj
 .Rhistory
 .RData
-/*.Rcheck/
-.Rproj.user/
 vignettes/*.html
 vignettes/*.pdf
 .httr-oauth
-*_cache/
-/cache/
 *.utf8.md
 *.knit.md
-*.Rproj
-cypress.Rproj
-
-.Rproj
-.DS_Store
-/.git/
-hidden_file_ext = (
-    ".renviron", ".rprofile", ".rproj", ".rproj.user", ".rhistory",
-    ".rapp.history", ".o", ".sl", ".so", ".dylib", ".a", ".dll",
-    ".def", ".ds_store", "unsrturl.bst", ".log", ".aux", ".backups",
-    ".cproject", ".directory", ".dropbox", ".exrc", ".gdb.history",
-    ".gitattributes", ".gitmodules", ".hgtags", ".project", ".seed",
-    ".settings", ".tm_properties"
-)
-
-inst/doc
-.Rproj.user
-/doc/
-/Meta/
-.Rhistory
-.Rdata
-.httr-oauth
 .DS_Store
