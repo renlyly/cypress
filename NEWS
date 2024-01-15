@@ -1,13 +1,4 @@
 
-
-Changes in version 0.5.0 (2023-12-21):
-
-* solved Error for initial code and data, but still have note and warning.
-* Write Rd file, vignettes, unitTests
-* Write NAMESPACE, DESCRIPTION and .gitignore
-* fix warning and error from Biocheck and
-* pass cmd check, cmd build
-
-Changes in version 0.99.0 (2023-12-25)
+Changes in version 0.99.0 (202-01-415)
 
 * Submitted to Bioconductor
