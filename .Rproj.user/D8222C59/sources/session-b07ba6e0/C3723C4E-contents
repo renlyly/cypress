@@ -1,5 +1,6 @@
 cypress.Rproj
-
+.rproj
+cypress.rproj
 .Rhistory
 .RData
 vignettes/*.html
