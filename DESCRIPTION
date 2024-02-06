@@ -21,7 +21,7 @@ Description: CYPRESS is an Cell Type specific power tool. This package aims to
   perform power analysis for the cell type-specific data. It calculates FDR, 
   FDC,and power, under various study design parameters, including but not
   limited   to sample size, and effect size.  It takes the input of the 
-  SummarizeExperimental（SE）object with observed mixture data (feature by 
+  SummarizeExperimental(SE) object with observed mixture data (feature by 
   sample matrix), and the cell type mixture proportions (sample by cell type 
   matrix).  It can solve the cell type mixture proportions from the reference
   free panel from TOAST and conduct  tests to identify cell-type-specific 

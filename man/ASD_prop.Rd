@@ -25,8 +25,8 @@ data(ASD_prop_se)
 \value{
 One S4 object.
 }
+
 \examples{
 data(ASD_prop_se)
-
 }
 \keyword{datasets}

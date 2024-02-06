@@ -10,3 +10,4 @@ vignettes/*.pdf
 .DS_Store
 .Rproj.user
 .gitignore.save
+/docs/

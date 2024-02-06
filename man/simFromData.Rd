@@ -65,7 +65,7 @@ estimation purposes.
 \examples{
 data(ASD_prop_se)
 result <- simFromData(INPUTdata = ASD_prop, CT_index = (seq_len(6) + 2), CT_unk = FALSE,
-                      n_sim = 2,n_gene = 3000,DE_pct = 0.05,
+                      n_sim = 2,n_gene = 1000,DE_pct = 0.05,
                       ss_group_set = c(10,20),
                       lfc_set = c(1, 1.5))
 }

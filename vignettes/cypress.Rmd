@@ -140,7 +140,7 @@ Unlike ``simFromData()`` which need user to provide their own count matrix and o
 ```{r, eval=FALSE, message=FALSE, warning=FALSE}
 data(quickParaGSE60424)
 result <- simFromParam(sim_param="IAD",   #Options for 'IAD','ASD' and 'IBD'
-                       n_sim = 2,DE_pct = 0.05,
+                       n_sim = 2,DE_pct = 0.05,n_gene = 1000,
                        ss_group_set = c(10, 20),lfc_set = c(1, 1.5),
                        lfc_target = 0.5, fdr_thred = 0.1)
 ```

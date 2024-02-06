@@ -89,7 +89,3 @@ quickPower<- function(data="IAD"){
   }
 
 }
-
-
-
-

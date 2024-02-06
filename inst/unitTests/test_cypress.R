@@ -1,7 +1,5 @@
 ##Unit Test using RUnit
 
-
-
 #test quickPower and plot functions
 test_quickPower <- function() {
   set.seed(123)
