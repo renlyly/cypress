@@ -1,4 +1,8 @@
 
-Changes in version 0.99.0 (202-01-415)
+Changes in version 0.99.0 (2024-01-15)
 
 * Submitted to Bioconductor
+
+Changes in version 0.99.0 (2024-02-05)
+
+* debug for error and warning
