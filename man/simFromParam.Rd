@@ -55,8 +55,8 @@ patients were drawn from subjects with a range of immune-related diseases.}\cr
 }
 \examples{
 data(quickParaGSE60424)
-result <- simFromParam(sim_param="IAD",n_sim = 2,DE_pct = 0.05,n_gene = 3000,
-                         ss_group_set = c(10, 20),
+result <- simFromParam(sim_param="IAD",n_sim = 2,DE_pct = 0.05,n_gene = 1000,
+                         ss_group_set = c(8, 10),
                          lfc_set = c(1, 1.5),
                          lfc_target = 0.5, fdr_thred = 0.1)
 }

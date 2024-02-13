@@ -130,7 +130,7 @@ data(ASD_prop_se)
 result <- simFromData(INPUTdata = ASD_prop,  #User can provide their own designed SE object
                       CT_index = (seq_len(6) + 2), CT_unk = FALSE,
                       n_sim = 2,n_gene = 1000,DE_pct = 0.05,
-                      ss_group_set = c(10,20),
+                      ss_group_set = c(8,10),
                       lfc_set = c(1, 1.5))
 ```
 
@@ -141,7 +141,7 @@ Unlike ``simFromData()`` which need user to provide their own count matrix and o
 data(quickParaGSE60424)
 result <- simFromParam(sim_param="IAD",   #Options for 'IAD','ASD' and 'IBD'
                        n_sim = 2,DE_pct = 0.05,n_gene = 1000,
-                       ss_group_set = c(10, 20),lfc_set = c(1, 1.5),
+                       ss_group_set = c(8, 10),lfc_set = c(1, 1.5),
                        lfc_target = 0.5, fdr_thred = 0.1)
 ```
 
