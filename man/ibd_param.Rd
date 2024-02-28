@@ -2,6 +2,10 @@
 \docType{data}
 \name{ibd_prop_param}
 \alias{ibd_prop_param}
+
+\alias{quickParaIBD}
+\alias{ibd_param}
+
 \title{parameter esitmate results from IBD data with cell type proportion}
 \format{
 Parameter esitmate results from IBD for simFromPara function

@@ -1,5 +1,8 @@
 \name{simFromData}
 \alias{simFromData}
+\alias{cypress}
+
+
 \title{Power calculation results on input data}
 
 \usage{

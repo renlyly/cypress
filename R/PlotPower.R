@@ -1,21 +1,41 @@
 
 plotPower<-function(simulation_results,effect.size=1,sample_size=10){
+  if (!is(simulation_results, "cypress_out")) {
+    stop("simulation_results must be an S4 object of class 'cypress_out'.")
+  }
+  if (!is.numeric(sample_size) || sample_size <= 5) {
+    stop("sample_size must be a numeric value greater than 5.")
+  }
 
-  ss<-unique(simulation_results@PWR_bio_smry$ss)
-  lfc_mean<-unique(simulation_results@PWR_bio_smry$lfc)
+  ss <- unique(slot(simulation_results, "FDC_bio_smry")$ss)
+  lfc_mean <- unique(slot(simulation_results, "FDC_bio_smry")$lfc)
+
+  # ss<-unique(simulation_results@PWR_bio_smry$ss)
+  # lfc_mean<-unique(simulation_results@PWR_bio_smry$lfc)
+  #
+
   if(!(sample_size %in% ss)) stop("Sample size should be one of your design sample size set.")
   if(!(effect.size %in% lfc_mean)) stop("Effect size should be one of your design effect size set.")
   if(length(lfc_mean)<2) stop("The length of lfc_set input should be greater than 2")
 
   ###power result for ss_smry (effect_size x sample)
-  ss_pwr<-simulation_results@PWR_bio_smry$PWR
+  ss_pwr <- slot(simulation_results, "PWR_bio_smry")$PWR
+
+  # ss_pwr<-simulation_results@PWR_bio_smry$PWR
+
   ss_smry<-matrix(ss_pwr,nrow =length(lfc_mean),ncol=length(ss),byrow = TRUE)
   rownames(ss_smry)<-lfc_mean
   colnames(ss_smry)<-ss
 
   ###power result for ct_lfc_smry (effect_size x celltype)
-  ct_n<-ncol(simulation_results@ct_PWR_bio_smry)-3
-  ct_smry_tmp<-simulation_results@ct_PWR_bio_smry
+
+  ct_n <- ncol(slot(simulation_results, "ct_PWR_bio_smry")) - 3
+  ct_smry_tmp <- slot(simulation_results, "ct_PWR_bio_smry")
+
+  # ct_n<-ncol(simulation_results@ct_PWR_bio_smry)-3
+  # ct_smry_tmp<-simulation_results@ct_PWR_bio_smry
+
+
   ct_smry<-ct_smry_tmp[which(ct_smry_tmp$ss==sample_size),seq_len(ct_n)]
 
   ###power result for ct_ss_smry (sample_size x celltype)
@@ -24,12 +44,19 @@ plotPower<-function(simulation_results,effect.size=1,sample_size=10){
 
   ###power result for strata_smry (strata x sample_size | strata x effect_size)
   strata<- seq_len(9)
-  strata_smry_tmp<-simulation_results@PWR_strata_bio_smry
+
+  strata_smry_tmp <- slot(simulation_results, "PWR_strata_bio_smry")
+
+  # strata_smry_tmp<-simulation_results@PWR_strata_bio_smry
+
 strata_smry_ss<-t(strata_smry_tmp[which(strata_smry_tmp$lfc==effect.size),strata])
 strata_smry_eff<-t(strata_smry_tmp[which(strata_smry_tmp$ss==sample_size),strata])
 
   ###power result for strata_ct_smry
-  strata_smry_ct_tmp<-simulation_results@PWR_strata_ct_bio_smry
+strata_smry_ct_tmp <- slot(simulation_results, "PWR_strata_ct_bio_smry")
+
+  # strata_smry_ct_tmp<-simulation_results@PWR_strata_ct_bio_smry
+
 strata_smry_ct<-t(strata_smry_ct_tmp[which(strata_smry_ct_tmp$lfc==effect.size &
                                       strata_smry_ct_tmp$ss==sample_size),strata])
 

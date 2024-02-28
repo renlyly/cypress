@@ -3,6 +3,8 @@
 \name{ASD_prop}
 \alias{ASD_prop}
 
+\alias{ASD_prop_se}
+
 \title{SimFromData example raw input data}
 \format{
 SE object.

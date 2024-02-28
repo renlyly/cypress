@@ -2,6 +2,9 @@
 \docType{data}
 \name{GSE60424_param}
 \alias{GSE60424_param}
+
+\alias{quickParaGSE60424}
+
 \title{parameter esitmate results from GSE60424}
 \format{
  Parameter esitmate results from GSE60424 for simFromPara function

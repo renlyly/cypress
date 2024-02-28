@@ -10,10 +10,15 @@ simFromData<- function(INPUTdata = NULL, CT_index = NULL,CT_unk=FALSE,
                         lfc_set = c(0, 0.5, 1, 1.5, 2),
                         lfc_target = 0.5, fdr_thred = 0.1){
 
+  if (!is(INPUTdata, "SummarizedExperiment")) {
+    stop("INPUTdata must be a SummarizedExperiment object.")
+  }
+
+
   estimate_all <- cypress_est(INPUTdata,CT_index,CT_unk)
 
-  K<-ncol(estimate_all@sample_CT_prop)
-
+  # K<-ncol(estimate_all@sample_CT_prop)
+  K <- ncol(slot(estimate_all, "sample_CT_prop"))
   power_long <-cypressEmbedded(n_sim = n_sim, n_gene = n_gene, DE_pct = DE_pct,
                              ncell_type = K, ss_group_set = ss_group_set,
                              lfc_set = lfc_set,
@@ -31,13 +36,22 @@ simFromParam<- function(n_sim = 3, n_gene = 30000, DE_pct = 0.05,
                          lfc_set = c(0, 0.5, 1, 1.5, 2),
                          sim_param="IAD",
                          lfc_target = 0.5, fdr_thred = 0.1){
+  if (!is.numeric(n_sim)) {
+    stop("n_sim must be a numeric value.")
+  }
+  if (!is.numeric(n_gene)) {
+    stop("n_gene must be a numeric value.")
+  }
+
+
 
   if (sim_param == "IAD") {
 
     GSE60424_param <- NULL
     data(list = 'quickParaGSE60424', envir = environment())
 
-    K<-ncol(GSE60424_param@health_lmean_d)
+    # K<-ncol(GSE60424_param@health_lmean_d)
+    K <- ncol(slot(GSE60424_param, "health_lmean_d"))
     power_short<- cypressEmbedded(n_sim = n_sim, n_gene = n_gene, DE_pct = DE_pct,
                                 ncell_type = K, ss_group_set = ss_group_set,
                                 lfc_set = lfc_set,
@@ -46,7 +60,8 @@ simFromParam<- function(n_sim = 3, n_gene = 30000, DE_pct = 0.05,
   } else if (sim_param == "IBD") {
     ibd_prop_param <- NULL
     data(list = 'quickParaIBD', envir = environment())
-    K<-ncol(ibd_prop_param@health_lmean_d)
+    # K<-ncol(ibd_prop_param@health_lmean_d)
+    K <- ncol(slot(ibd_prop_param, "health_lmean_d"))
     power_short<- cypressEmbedded(n_sim = n_sim, n_gene = n_gene, DE_pct = DE_pct,
                                 ncell_type = K, ss_group_set = ss_group_set,
                                 lfc_set = lfc_set,
@@ -56,7 +71,8 @@ simFromParam<- function(n_sim = 3, n_gene = 30000, DE_pct = 0.05,
    else if (sim_param == "ASD") {
       asd_noprop_param <- NULL
       data(list = 'quickParaASD', envir = environment())
-      K<-ncol(asd_noprop_param@health_lmean_d)
+      # K<-ncol(asd_noprop_param@health_lmean_d)
+      K <- ncol(slot(asd_noprop_param, "health_lmean_d"))
       power_short <-cypressEmbedded(n_sim = n_sim, n_gene = n_gene, DE_pct = DE_pct,
                                   ncell_type = K, ss_group_set = ss_group_set,
                                   lfc_set = lfc_set,

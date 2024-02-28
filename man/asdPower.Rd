@@ -2,6 +2,10 @@
 
 \name{asd_nopropPower}
 \alias{asd_nopropPower}
+
+\alias{quickPowerASD}
+\alias{asdPower}
+
 \docType{data}
 \title{Power calculation results From ASD data without cell type proportion}
 \format{

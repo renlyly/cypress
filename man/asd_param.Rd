@@ -1,7 +1,11 @@
 
 \docType{data}
 \name{asd_noprop_param}
+
 \alias{asd_noprop_param}
+\alias{quickParaASD}
+\alias{asd_param}
+
 \title{Parameter esitmate results from ASD data without cell type proportion}
 \format{
 Parameter esitmate results from ASD for simFromPara function

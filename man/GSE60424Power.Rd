@@ -2,6 +2,11 @@
 
 \name{GSE60424Power}
 \alias{GSE60424Power}
+
+\alias{quickPowerGSE60424}
+\alias{GSE60424Power}
+
+
 \docType{data}
 \title{Power calculation results from GSE60424 data}
 \format{

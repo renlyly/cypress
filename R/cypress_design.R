@@ -49,14 +49,25 @@ cypress_design <- function(n_sim, n_gene, DE_pct,
   n_scenarios <- dim(scenarios)[1]
   n_strata <- length(exp_strata)-1
   # mean and var/cov of distribution mean
-  health_lmean_m <- sim_param@health_lmean_m
-  health_lmean_d <- sim_param@health_lmean_d
-  # mean and var/cov of distribution dispersion
-  lod_m <- sim_param@lod_m
-  lod_d <- sim_param@lod_d
-  # proportion alpha parameter.
-  health_alpha <- sim_param@health_alpha
-  case_alpha <- sim_param@case_alpha
+
+  # health_lmean_m <- sim_param@health_lmean_m
+  # health_lmean_d <- sim_param@health_lmean_d
+  # # mean and var/cov of distribution dispersion
+  # lod_m <- sim_param@lod_m
+  # lod_d <- sim_param@lod_d
+  # # proportion alpha parameter.
+  # health_alpha <- sim_param@health_alpha
+  # case_alpha <- sim_param@case_alpha
+
+  health_lmean_m <- slot(sim_param, "health_lmean_m")
+  health_lmean_d <- slot(sim_param, "health_lmean_d")
+  lod_m <- slot(sim_param, "lod_m")
+  lod_d <- slot(sim_param, "lod_d")
+  health_alpha <- slot(sim_param, "health_alpha")
+  case_alpha <- slot(sim_param, "case_alpha")
+
+
+
   if(!(ncell_type == length(health_alpha) &
      ncell_type == length(case_alpha) &
      ncell_type == length(health_lmean_m) &

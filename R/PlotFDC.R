@@ -1,18 +1,35 @@
 
 plotFDC<-function(simulation_results,sample_size=10){
-  ss<-unique(simulation_results@FDC_bio_smry$ss)
-  lfc_mean<-unique(simulation_results@FDC_bio_smry$lfc)
+  if (!is(simulation_results, "cypress_out")) {
+    stop("simulation_results must be an S4 object of class 'cypress_out'.")
+  }
+  if (!is.numeric(sample_size) || sample_size <= 5) {
+    stop("sample_size must be a numeric value greater than 5.")
+  }
+
+  ss <- unique(slot(simulation_results, "FDC_bio_smry")$ss)
+  lfc_mean <- unique(slot(simulation_results, "FDC_bio_smry")$lfc)
+  #
+  # ss<-unique(simulation_results@FDC_bio_smry$ss)
+  # lfc_mean<-unique(simulation_results@FDC_bio_smry$lfc)
 
   if(!(sample_size %in% ss)) stop("Sample size should be one of your design sample size set.")
   if(length(lfc_mean)<2) stop("The length of lfc_set input should be greater than 2")
 
   ###FDC result for ct_smry
-  ct_n<-ncol(simulation_results@ct_FDC_bio_smry)-3
-  ct_smry_tmp<-simulation_results@ct_FDC_bio_smry
+  ct_n <- ncol(slot(simulation_results, "ct_FDC_bio_smry")) - 3
+  ct_smry_tmp <- slot(simulation_results, "ct_FDC_bio_smry")
+
+  # ct_n<-ncol(simulation_results@ct_FDC_bio_smry)-3
+  # ct_smry_tmp<-simulation_results@ct_FDC_bio_smry
+
   ct_smry<-ct_smry_tmp[which(ct_smry_tmp$ss==sample_size),seq_len(ct_n)]
 
   ###FDC result for ss_smry
-  ss_FDC<-simulation_results@FDC_bio_smry$FDC
+  ss_FDC <- slot(simulation_results, "FDC_bio_smry")$FDC
+
+  # ss_FDC<-simulation_results@FDC_bio_smry$FDC
+
   ss_smry<-matrix(ss_FDC,nrow =length(lfc_mean),ncol=length(ss),byrow = TRUE)
   rownames(ss_smry)<-lfc_mean
   colnames(ss_smry)<-ss

@@ -2,6 +2,7 @@
 
 \name{plotFDC}
 \alias{plotFDC}
+
 \title{plotFDC:Generate FDC results figure}
 \arguments{
 \item{simulation_results}{A list of results produced by power evaluation functions.}

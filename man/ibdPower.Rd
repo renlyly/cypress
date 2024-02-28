@@ -2,6 +2,11 @@
 
 \name{ibd_propPower}
 \alias{ibd_propPower}
+
+\alias{quickPowerIBD}
+\alias{ibdPower}
+
+
 \docType{data}
 \title{Power calculation results from IBD data with cell type proportion}
 \format{
