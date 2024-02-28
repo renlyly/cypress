@@ -2,7 +2,7 @@
 
 \name{plotTDR}
 \alias{plotTDR}
-\title{plotTDR:Generate TDR results figure}
+\title{plotTDR: Generate TDR results figure}
 \arguments{
 \item{simulation_results}{A list of results produced by power evaluation functions.}
 
@@ -14,19 +14,19 @@ For example, 10 means when plotting the relationship between TDR and top rank ge
 }
 
 \description{
-This function plots all true discovery rate measurements in a 2x2 panel.The illustration of each plot is as follow:
+This function plots all true discovery rate measurements in a 2x2 panel. The illustration of each plot is as follows:
 
-1: True discovery rate(TDR) by top rank genes, each line represent cell type.
+1: True discovery rate(TDR) by top-rank genes, each line represents cell type.
 Sample size to be fixed at 10 and effect size to be fixed at 1 if sample_size=10 and effect.size=1.
 
-2: True discovery rate(TDR) by top rank genes, each line represent effect size.
-TDR was average value across cell types and sample size to be fixed at 10 if sample_size=10.
+2: True discovery rate(TDR) by top rank genes, each line represents effect size.
+TDR was the average value across cell types and sample size is fixed at 10 if sample_size=10.
 
-3: True discovery rate(TDR) by top rank genes, each line represent sample size.
-TDR was average value across cell types and effect size to be fixed at 1 if effect.size=1.
+3: True discovery rate(TDR) by top rank genes, each line represents sample size.
+TDR was the average value across cell types and effect size is fixed at 1 if effect.size=1.
 
-4: True discovery rate(TDR) by effect size, each line represent sample size.
-TDR was calculated under the scenario of top rank gene equals to 350.
+4: True discovery rate(TDR) by effect size, each line represents sample size.
+TDR was calculated under the scenario of top rank gene equals 350.
 
 
 }
@@ -40,7 +40,7 @@ conditions.
 \examples{
 
  data(quickPowerGSE60424)
-### plot power results
+### Plot power results
  plotTDR(GSE60424Power,effect.size=1,sample_size=10)
 
 }

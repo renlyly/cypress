@@ -8,7 +8,7 @@
 
 \title{Parameter esitmate results from ASD data without cell type proportion}
 \format{
-Parameter esitmate results from ASD for simFromPara function
+Parameter esitmate results from ASD for simFromParam function
   \describe{
   \item{\code{health_lm_mean}}{A numeric vector of the log mean parameter
   estimates for healthy samples.}
@@ -27,7 +27,7 @@ Parameter esitmate results from ASD for simFromPara function
 data('quickParaASD')
 }
 \description{
- An S4 object of that stores parameter estimates associated with the IBD
+ An S4 object that stores parameter estimates associated with the IBD
  dataset. This object contains a variety of numerical vectors and matrices
  representing different statistical parameters used in the simulation.
 }

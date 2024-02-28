@@ -32,7 +32,7 @@
 data('quickPowerGSE60424')
 }
 \description{
-pre-calculated power evaluation results from GSE60424 datasets.The patients were
+pre-calculated power evaluation results from GSE60424 datasets. The patients were
 drawn from subjects with a range of immune-related diseases. The obtained
 results can be used to create plots from plot functions.
 }

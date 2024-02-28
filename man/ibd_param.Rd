@@ -6,9 +6,9 @@
 \alias{quickParaIBD}
 \alias{ibd_param}
 
-\title{parameter esitmate results from IBD data with cell type proportion}
+\title{Parameter estimate results from IBD data with cell type proportion}
 \format{
-Parameter esitmate results from IBD for simFromPara function
+Parameter estimate results from IBD for the simFromParam function
   \describe{
   \item{\code{health_lm_mean}}{A numeric vector of the log mean parameter
   estimates for healthy samples.}
@@ -28,7 +28,7 @@ Parameter esitmate results from IBD for simFromPara function
 data('quickParaIBD')
 }
 \description{
- An S4 object of that stores parameter estimates associated with the IBD
+ An S4 object that stores parameter estimates associated with the IBD
  dataset. This object contains a variety of numerical vectors and matrices
  representing different statistical parameters used in the simulation.
 }

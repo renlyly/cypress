@@ -13,12 +13,12 @@ simFromData(INPUTdata = NULL, CT_index = NULL, CT_unk = FALSE,
             lfc_target = 0.5, fdr_thred = 0.1)
 }
 \arguments{
-\item{INPUTdata}{The input SE (SummarizedExperiment) object should containing a
-count matrix, study design, and a optional cell type proportion matrix. The
+\item{INPUTdata}{The input SE (SummarizedExperiment) object should contain a
+count matrix, study design, and an optional cell type proportion matrix. The
 study design should have a column named 'disease', where the control by 1 and
 the case is indicated by 2. If provided, the cell type proportion matrix should
-sum to 1 for each sample. The cell type proportion matrixmatrix is optional,
-the CT_unk should be True if user did not provide this matrix}
+sum to 1 for each sample. The cell type proportion matrix is optional,
+the CT_unk should be True if the user did not provide this matrix}
   \item{CT_index}{Column index for cell types proportion matrix in Coldata, the
   input can be a single number (>3) when the \code{CT_unk} is T.}
   \item{CT_unk}{Logical flag indicating whether unknown cell types are present.
@@ -58,9 +58,9 @@ estimation purposes.
   \describe{
     \item{\code{counts}}{A gene expression value dataset}
     \item{\code{colData}}{Sample meta-data. The first column is the group status
-    (i.e. case/ctrl) named as 'disease', the second column is the subject ID.
+    (i.e. case/ctrl) named as 'disease', and the second column is the subject ID.
     The remaining are the cell type proportions of all samples. The user could
-    also input Column index for cell types proportion matrix in Coldata.
+    also input the Column index for cell types proportion matrix in Coldata.
     Example: CT_index= 3:8}
   }
 

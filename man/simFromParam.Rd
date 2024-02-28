@@ -22,9 +22,9 @@ simFromParam(n_sim = 3, n_gene = 30000, DE_pct = 0.05,
   to use. By default set to 'GSE60424_param', which is a cell line specific
   data. Other options include 'IBD' data, and 'ASD' data}
   \item{lfc_target}{Target effect size, should be greater than or equal to 0.
-    The absolute LFC lower than this values will be treated as None-DEGs.
+    The absolute LFC lower than this value will be treated as None-DEGs.
     Default to 0.5}
-  \item{fdr_thred}{Adjusted p value threshold, should not below 0 or exceed 1.
+  \item{fdr_thred}{Adjusted p value threshold, should not be below 0 or exceed 1.
     default to 0.1}
 }
 
@@ -45,7 +45,7 @@ simFromParam(n_sim = 3, n_gene = 30000, DE_pct = 0.05,
 }
 \description{
 This function conducts simulations with various user-defined study design
-parameters, including but not limited to sample size, log fold change.)
+parameters, including but not limited to sample size, and log fold change.)
 }
 \details{
 {GSE60424: }{whole transcriptome signatures of 6 immune cell subsets.The

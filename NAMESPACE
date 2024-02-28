@@ -5,6 +5,11 @@ export('plotFDC')
 export('plotPower')
 export('plotTDR')
 
+# exportClasses('est_out')
+# exportClasses('cypress_out')
+# exportMethods('est_out')
+# exportMethods('cypress_out')
+
 # importFrom('sirt','dirichlet.mle')
 import('sirt')
 #import('gtools')

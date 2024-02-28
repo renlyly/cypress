@@ -3,24 +3,24 @@
 \name{plotFDC}
 \alias{plotFDC}
 
-\title{plotFDC:Generate FDC results figure}
+\title{plotFDC: Generate FDC results figure}
 \arguments{
 \item{simulation_results}{A list of results produced by power evaluation functions.}
 
 \item{sample_size}{A numerical value indicating which sample size to be fixed.
-For example, 10 means when plotting the relationship between FDC and effect size,we fixed the scenario of sample size at 10. Default is 10.}
+For example, 10 means when plotting the relationship between FDC and effect size, we fixed the scenario of sample size at 10. Default is 10.}
 }
 
 \description{
 Plot false discovery cost results.
-This function plots false discovery cost results in a 2x1 panel.The illustration
+This function plots false discovery cost results in a 2x1 panel. The illustration
 of each plot from left to right:
 
-1: False discovery cost(FDC) by effect size, each line represent cell type.
+1: False discovery cost(FDC) by effect size, each line represents cell type.
 Sample size to be fixed at 10 if sample_size=10.
 
-2: False discovery cost(FDC) by top effect size, each line represent sample size.
-FDC was average value across cell types.
+2: False discovery cost(FDC) by top effect size, each line represents sample size.
+FDC was the average value across cell types.
 }
 
 \value{
@@ -33,7 +33,7 @@ different sample size, averaged across cell types.
 \examples{
 
  data(quickPowerGSE60424)
-### plot power results
+### Plot power results
  plotFDC(GSE60424Power,sample_size=10)
 
 }

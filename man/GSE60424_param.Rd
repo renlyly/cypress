@@ -5,9 +5,9 @@
 
 \alias{quickParaGSE60424}
 
-\title{parameter esitmate results from GSE60424}
+\title{Parameter estimate results from GSE60424}
 \format{
- Parameter esitmate results from GSE60424 for simFromPara function
+ Parameter estimate results from GSE60424 for simFromParam function
    \describe{
   \item{\code{health_lm_mean}}{A numeric vector of the log mean parameter
   estimates for healthy samples.}
@@ -26,7 +26,7 @@
 data('quickParaGSE60424')
 }
 \description{
- An S4 object of that stores parameter estimates associated with the GSE60424
+ An S4 object that stores parameter estimates associated with the GSE60424
  dataset. This object contains a variety of numerical vectors and matrices
  representing different statistical parameters used in the simulation.
  The patients were drawn from subjects with a range of immune-related diseases.
