@@ -20,9 +20,9 @@ cypress is the first statistical tool to evaluate the power in cell-type-specifi
 
 \value{
 
-cypress offers 3 functions for simulation and power evaluation: \code{simFromData} ,\code{simFromParam} and ``quickPower()``. If users have their own bulk RNA-seq count data, they can use the ``simFromData()`` function, otherwise, they can use ``simFromParam()`` estimating parameters from 3 existing studies to perform power evaluation on customized the simulation settings. If users prefer to quickly examine the power evaluation results using the built-in datasets, they can use the ``quickPower()`` function. The output of these 3 functions is a S4 object with a list of power measurements under various experimental settings, such as Statistical Power, TDR, and FDC.
+cypress offers 3 functions for simulation and power evaluation: \code{simFromData()} ,\code{simFromParam()} and \code{quickPower()}. If users have their own bulk RNA-seq count data, they can use the \code{simFromData()} function, otherwise, they can use \code{simFromParam()} estimating parameters from 3 existing studies to perform power evaluation on customized the simulation settings. If users prefer to quickly examine the power evaluation results using the built-in datasets, they can use the \code{quickPower()} function. The output of these 3 functions is a S4 object with a list of power measurements under various experimental settings, such as Statistical Power, TDR, and FDC.
 
-Once users have obtained an S4 object with a list of power measurements using either \code{simFromData}, \code{simFromParam} or \code{quickPower()}, they can use the following functions to generate basic line plots: \code{plotPower()}, \code{plotTDR()} and \code{plotFDC()}.
+Once users have obtained an S4 object with a list of power measurements using either \code{simFromData()}, \code{simFromParam()} or \code{quickPower()}, they can use the following functions to generate basic line plots: \code{plotPower()}, \code{plotTDR()} and \code{plotFDC()}.
 
 }
 
