@@ -24,7 +24,7 @@ data(ASD_prop_se)
 
 }
 \value{
-One S4 object.
+One SE object.
 }
 
 \examples{

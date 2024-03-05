@@ -45,10 +45,19 @@ test_sim <- function() {
                         ss_group_set = ss_groupset,
                         lfc_set = c(1, 1.5))
 
+  test2 <- simFromParam(sim_param="IAD",n_sim = 2,DE_pct = 0.05,n_gene = 1000,
+                         ss_group_set = c(8, 10),
+                         lfc_set = c(1, 1.5),
+                         lfc_target = 0.5, fdr_thred = 0.1)
+
+
   checkEquals(ncol(slot(test,"ct_FDC_bio_smry")),length(length_ct)+3)
   checkEquals(ncol(slot(test,"PWR_strata_ct_bio_smry")),13)
-  checkEquals(nrow(slot(test,"ct_TDR_bio_smry")),length(length_ct)*nsim*2)
-  checkEquals(unique(slot(test,"ct_PWR_bio_smry")$ss),ss_groupset )
+  checkEquals(nrow(slot(test2,"ct_TDR_bio_smry")),length(length_ct)*nsim*2)
+  checkEquals(unique(slot(test2,"ct_PWR_bio_smry")$ss),ss_groupset )
+
+
+
 }
 
 
