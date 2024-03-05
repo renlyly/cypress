@@ -267,7 +267,7 @@ S4tolist<-function(INPUT = NULL, CT_index = NULL,CT_unk= FALSE ){
       ncell_type <- ncol(sample_CT_prop)
     }
   if (ncell_type < 3) {
-    stop("ECell type number must >= 3")
+    stop("Cell type number must >= 3")
   }
     return(list(Count = Count_matrix, design = design,
                 sample_CT_prop = sample_CT_prop, ncell_type = ncell_type))

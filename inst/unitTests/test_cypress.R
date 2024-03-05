@@ -27,3 +27,30 @@ test_quickPower <- function() {
                   length(p3)) > 0))
 
 }
+
+
+
+
+
+#test simulation functions
+test_sim <- function() {
+
+  data(ASD_prop_se)
+  length_ct <-(seq_len(6) + 2)
+  nsim<-2
+  ss_groupset<-c(8,10)
+
+  test <- simFromData(INPUTdata = ASD_prop, CT_index = length_ct, CT_unk = FALSE,
+                        n_sim = nsim,n_gene = 1000, DE_pct = 0.05,
+                        ss_group_set = ss_groupset,
+                        lfc_set = c(1, 1.5))
+
+  checkEquals(ncol(slot(test,"ct_FDC_bio_smry")),length(length_ct)+3)
+  checkEquals(ncol(slot(test,"PWR_strata_ct_bio_smry")),13)
+  checkEquals(nrow(slot(test,"ct_TDR_bio_smry")),length(length_ct)*nsim*2)
+  checkEquals(unique(slot(test,"ct_PWR_bio_smry")$ss),ss_groupset )
+}
+
+
+
+

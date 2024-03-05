@@ -6,6 +6,9 @@ plotPower<-function(simulation_results,effect.size=1,sample_size=10){
   if (!is.numeric(sample_size) || sample_size <= 5) {
     stop("sample_size must be a numeric value greater than 5.")
   }
+  if (!is.numeric(effect.size) || effect.size <= 0) {
+    stop("sample_size must be a numeric value greater than 0.")
+  }
 
   ss <- unique(slot(simulation_results, "FDC_bio_smry")$ss)
   lfc_mean <- unique(slot(simulation_results, "FDC_bio_smry")$lfc)

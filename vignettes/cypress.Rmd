@@ -14,7 +14,7 @@ package: cypress
 output:
   BiocStyle::html_document
 abstract: |
-  This vignette of cypress (**c**ell-t**y**pe-s**p**ecific powe**r** ass**ess**ment), which is specifically designed to perform comprehensive cell-type-specific power assessment for differential expression using RNA-sequencing experiments. It accepts real Bulk RNAseq data as input for parameter estimation and simulation. The tool provides flexibility by allowing users to customize sample sizes, number of cell types, and log2 fold change values. Additionally, it computes statistical power, true discovery rate (TDR), and false discovery cost (FDC) under different scenarios as results. The vignette also offers functions to generate basic line plots illustrating stratified power, TDR and FDC.
+  This vignette of cypress (**c**ell-t**y**pe-s**p**ecific powe**r** ass**ess**ment), which is specifically designed to perform comprehensive power assessment for cell-type-specific differential expression (csDE) analysis using RNA-sequencing experiments. It could accept real bulk RNA-seq data as the input for parameter estimation and simulation, or use program-provided parameters to achieve the same goal. This flexible tool allows users to customize sample sizes, percentage of csDE genes, number of cell types, and effect size values. Additionally, it computes statistical power, true discovery rate (TDR), and false discovery cost (FDC) under different scenarios as results. The package also offers functions to generate basic line plots illustrating stratified power, TDR and FDC.
 vignette: |
   %\VignetteIndexEntry{cypress Package User's Guide}
   %\VignetteEngine{knitr::rmarkdown}
@@ -23,25 +23,26 @@ vignette: |
 
 ```{r, echo=FALSE}
 htmltools::img(
-    src = knitr::image_uri("cypress_official.png"),
-    alt = "logo",
-    style = "position:absolute; top:0; right:0; padding:10px; height:280px"
+    src=knitr::image_uri("cypress_official.png"),
+    alt="logo",
+    style="position:absolute; top:0; right:0; padding:10px; height:280px"
 )
 ```
 
 \tableofContents
 
 # Background
-Currently, there is a lack of experimental design and statistical power assessment tool for RNA-sequencing experiments and clinical researchers are facing difficulties in using cell-type-specific Differentially Expressed (csDE) gene detection methods in real practice. One of the major difficulties is to determine sample sizes required for experimental designs under various scenarios and required by grant applications. In a real RNA-sequencing study, effect size, variance, baseline expression level, and biological variation all impact sample size determinations.      
+Bulk RNA-sequencing technology has now been routinely adopted in clinical studies to investigate transcriptome profiles alterations associated with phenotypes-of-interest. In the past several years, computational deconvolution methods were developed to solve for cell mixture proportions. More recently, identifying cell-type-specific Differentially Expressed (csDE) genes has been made possible by methodology extensions of cell-type deconvolution. Currently, due to the lack of experimental design and statistical power assessment tool for cell-type-specific differential expression (csDE) analysis, clinical researchers are facing difficulties in using csDE gene detection methods in practice. One of the major difficulties is to determine a proper sample sizes required for a well-powered experimental designs. In a real RNA-sequencing study, effect size, gene expression level, biological and technical variation all impact statistical power determinations. Rigorous experimental design requires the statistical power assessment method that considers these factors. However, such a method is yet to be developed.     
 
-Here we develop a simulation-based method to obtain a power-sample size relationship. Users have the option to provide their own bulk-level RNA-sequencing data, allowing the package to estimate distribution parameters. Alternatively, the package includes three predefined distributional parameter sets from which users can choose. Specifically, the RNA-sequencing data simulation framework is based on a *Gamma-Poisson* compound and is borrowed from a previous [**benchmark study**](https://academic.oup.com/bib/article/24/1/bbac516/6874513). The cell-type-specific Differentially Expressed (csDE) genes calling process is implemented by [**TOAST**](https://www.bioconductor.org/packages/release/bioc/html/TOAST.html). We will stratify genes into distinct strata based on their expression levels and evaluate the power within each stratum. We particularly focus on examining the influence and the impact of sample size and sequencing depth, giving special consideration to genes with a low signal-to-noise ratio in sequencing data. 
+Here we present a statistical framework and tool cypress (cell-type-specific differential expression power assessment) to guide experimental design, assess statistical power, and optimize sample size requirements for csDE analysis. We adopt a rigorous statistical framework to reliably model purified cell-type-specific profiles, cell type compositions, biological and technical variations; provide thorough assessment using multiple statistical metrics through simulations; and provide a user-friendly tool to researchers for their own data simulation and power evaluation. 
 
-cypress is the first statistical tool to evaluate the power in cell-type-specific Differentially Expressed (csDE) genes detection experiments from a prospective way by letting researchers be flexible in tuning sample sizes, effect sizes, csDE genes percentage, total number of genetic features, type I error control, etc. 
+To use the cypress package, users have the option to provide their own bulk-level RNA-sequencing data, allowing the package to estimate distribution parameters. Alternatively, the package includes three predefined distributional parameter sets from which users can choose from, should the users have no pilot datasets. Specifically, the RNA-sequencing data simulation framework is based on a *Gamma-Poisson* compound that aligns with our previous [**benchmark study**](https://academic.oup.com/bib/article/24/1/bbac516/6874513). The cell-type-specific Differentially Expressed (csDE) genes calling process is implemented by [**TOAST**](https://www.bioconductor.org/packages/release/bioc/html/TOAST.html), a leading method in this domain. We will stratify genes into distinct strata based on their expression levels and evaluate the power within each stratum. We particularly focus on examining the influence and the impact of sample size and sequencing depth, giving special consideration to genes with a low signal-to-noise ratio in sequencing data. 
+
 
 # Installation 
 
 From Bioconductor:
-```{r, eval = FALSE, warning=FALSE, message=FALSE}
+```{r, eval=FALSE, warning=FALSE, message=FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE)) {
     install.packages("BiocManager")
 }
@@ -56,36 +57,36 @@ vignette("cypress")
 ```
 
 # Quickstart
-cypress offers the function ``simFromData`` when users are expected to provide their own data for parameter estimation and simulation. ``simFromData`` needs the input file organized into `r Biocpkg("SummarizedExperiment")` objects including a count matrix, study design, and an optional cell type proportion matrix. An example data `ASD_prop_se` is included:
+cypress offers the function ``simFromData`` when users want to provide their own bulk RNA-seq data for parameter estimation and simulation. ``simFromData`` needs the input file organized into `r Biocpkg("SummarizedExperiment")` objects including a count matrix, study design, and an optional cell type proportion matrix. An example data `ASD_prop_se` is included:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE}
 library(cypress)
 data(ASD_prop_se)
-result1 <- simFromData(INPUTdata = ASD_prop, #SummarizedExperiment object.
-                      CT_index = (seq_len(6) + 2), #Column index for cell types proportion matrix.
-                      CT_unk = FALSE, #CT_unk should be True if no cell type proportion matrix.
-                      n_sim = 2, #Total number of iterations users wish to conduct.
-                      n_gene = 1000,  #Total number of genetic features users with to conduct.
-                      DE_pct = 0.05, #Percentage of DEG on each cell type.
-                      ss_group_set = c(10,20), #Sample sizes per group users wish to simulate.
-                      lfc_set = c(1,1.5)) #Effect sizes users wish to simulate.
+result1 <- simFromData(INPUTdata=ASD_prop, #SummarizedExperiment object.
+                      CT_index=(seq_len(6) + 2), #Column index for cell types proportion matrix.
+                      CT_unk=FALSE, #CT_unk should be True if no cell type proportion matrix.
+                      n_sim=2, #Total number of iterations users wish to conduct.
+                      n_gene=1000,  #Total number of genetic features users with to conduct.
+                      DE_pct=0.05, #Percentage of DEG on each cell type.
+                      ss_group_set=c(10,20), #Sample sizes per group users wish to simulate.
+                      lfc_set=c(1,1.5)) #Effect sizes users wish to simulate.
 ```
 
-Unlike the ``simFromData`` function needs to provide real data, ``quickPower()`` provides quick power calculation results without their own simulations. This function is designed to provide quick access to pre-calculated results.
+Alternatively, the ``simFromData`` function needs to provide real data, ``quickPower()`` outputs power calculation results without the need to input pilot RNA-seq data. This function is designed to provide quick access to pre-calculated results.
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
 library(cypress)
 data(quickPowerGSE60424)
-result2<-quickPower(data = "IAD") # Options include 'IAD', 'IBD', or 'ASD'.
+result2<-quickPower(data="IAD") # Options include 'IAD', 'IBD', or 'ASD'.
 ```
 
-Produce basic line plots of power evaluation results conducted by ``quickPower()`` for visualization: 
+The following function produces basic line plots of power evaluation results conducted by ``quickPower()`` for visualization: 
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE}
 ### plot statistical power results
-plotPower(simulation_results=result2, # Simulation results generated by quickPower() or simFromData()
-          effect.size=1,              # A numerical value indicating which effect size is to be fixed.
-          sample_size=10 )            # A numerical value indicating which sample size to be fixed.
+plotPower(simulation_results=result2,# Simulation results generated by quickPower() or simFromData()
+          effect.size=1,# A numerical value indicating which effect size is to be fixed.
+          sample_size=10 )# A numerical value indicating which sample size to be fixed.
 
 ### plot TDR results
 plotTDR(simulation_results=result2,  
@@ -101,37 +102,39 @@ plotFDC(simulation_results=result2,
 # Input data
 There are 3 options for users to utilize cypress functions for parameter estimation and simulation:
 
-**Option 1**: Users wish to use their own real data for estimating parameters. The input file needs to be organized into a ``SummarizedExperiment`` object. The object should contain a feature by sample count matrix stored in the `counts` slot. It should also use the first column in the `colData` slot with a column name of 'disease' to store the group status (i.e. case/control), where the control by 1 and the case is indicated by 2. The second column in the `colData` slot to stores the subject IDs mapping to each sample. The remaining columns in the `colData` slot should store the cell type proportions. If provided, the cell type proportion matrix should sum to 1 for each sample. This cell-type proportion matrix is optional.
+**Option 1**: Users wish to use their own real data for estimating parameters. This situation fits well to research project where a small pilot RNA-seq dataset has been collected, and the users want to use the information embedded in the pilot dataset to conduct rigorous experimental design. The input file needs to be organized into a ``SummarizedExperiment`` object. The object should contain a feature by sample count matrix stored in the `counts` slot. It should also use the first column in the `colData` slot with a column name of 'disease' to store the group status (i.e. case/control), where the controls are indicated by 1 and the cases are indicated by 2. The second column in the `colData` slot to stores the subject IDs mapping to each sample. The remaining columns in the `colData` slot should store the cell type proportions. If provided, the cell type proportions should sum up to 1 for each sample. This cell type proportion matrix is helpful but optional.
+
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
 data(ASD_prop_se)
 ASD_prop
 ```
 
-**Option 2**: Users wish to use the existing study for parameter estimation. cypress provides 3 real datasets for estimating the parameters:
+**Option 2**: Users do not have pilot RNA-seq data for csDE analysis, and wish to use existing studies for parameter estimation and conduct customized downstream simulation. cypress provides 3 real datasets for estimating the parameters:
 
-* ``IAD``(GSE60424): Whole transcriptome signatures of 6 immune cell subsets,including neutrophils, monocytes, B cells, CD4 T cells, CD8 T cells, and natural killer cells. 
+* ``IAD``(GSE60424): Whole transcriptome signatures of 6 immune cell types, including neutrophils, monocytes, B cells, CD4 T cells, CD8 T cells, and natural killer cells. 
 
-* ``ASD``:The bulk RNA-seq data in a large autism spectrum disorder(ASD) study.The study includes 251 samples of frontal/temporal cortex and cerebellum brain regions. Samples are from 48 ASD subjects versus 49 controls.
+* ``ASD``: The bulk RNA-seq data in a large autism spectrum disorder (ASD) study. The study includes 251 samples of frontal/temporal cortex and cerebellum brain regions. Samples are from 48 ASD subjects versus 49 controls.
 
-* ``IBD``(GSE57945): The ileal transcriptome in pediatric inflammatory bowel disease(IBD).This dataset includes a cohort of 359 treatment-naïve pediatric patients with Crohn’s disease(CD,n=213), ulcerative colitis(UC,n=60) and healthy controls (n=41).
+* ``IBD``(GSE57945): The ileal transcriptome in pediatric inflammatory bowel disease (IBD). This dataset includes a cohort of 359 treatment-naïve pediatric patients with Crohn’s disease (CD, n=213), ulcerative colitis (UC, n=60) and healthy controls (n=41).
 
 
-**Option 3**: Users have nothing to provide but wish to use simulation, so they do not need to provide any data but can define their own study design parameters, including but not limited to the number of simulations, number of genes, sample size and log fold change.
+**Option 3**: Users have no pilot data to provide but wish to see results generative based on our own simulation, and have some quick experimental design references to check. 
+
 
 # Simulation & Evaluation
-cypress offers 3 functions for simulation and power evaluation: ``simFromData()`` ,``simFromPara()`` and ``quickPower()``. If users prefer to quickly examine the power evaluation results using the built-in datasets, they can use the ``quickPower()`` function. If users have their own bulk RNA-seq count data, they can use the ``simFromData()`` function, otherwise, they can use ``simFromParam()`` estimating parameters from 3 existing studies to perform power evaluation on customized the simulation settings. The output of these 3 functions is a S4 object with a list of power measurements under various experimental settings, such as Statistical Power, TDR, and FDC.
+cypress offers 3 functions for simulation and power evaluation: ``simFromData()`` ,``simFromPara()`` and ``quickPower()``. If users have their own bulk RNA-seq count data, they can use the ``simFromData()`` function, otherwise, they can use ``simFromParam()`` estimating parameters from 3 existing studies to perform power evaluation on customized the simulation settings. If users prefer to quickly examine the power evaluation results using the built-in datasets, they can use the ``quickPower()`` function. The output of these 3 functions is a S4 object with a list of power measurements under various experimental settings, such as Statistical Power, TDR, and FDC.
 
 ## Power evaluation with simFromData()
 ``simFromData()`` enables users to provide their own data or use the example data ``data(ASD_prop_se)`` , they can also specify the number of simulations (``nsim``), number of genes(``n_gene``), percentage of differential expressed genes for each cell type(``DE_pct``), sample sizes (``ss_group_set``), and log fold change (``lfc_set``). 
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
 data(ASD_prop_se)
-result <- simFromData(INPUTdata = ASD_prop,  #User can provide their own designed SE object
-                      CT_index = (seq_len(6) + 2), CT_unk = FALSE,
-                      n_sim = 2,n_gene = 1000,DE_pct = 0.05,
-                      ss_group_set = c(8,10),
-                      lfc_set = c(1, 1.5))
+result <- simFromData(INPUTdata=ASD_prop,  #User can provide their own designed SE object
+                      CT_index=(seq_len(6)+2), CT_unk=FALSE,
+                      n_sim=2,n_gene=1000,DE_pct=0.05,
+                      ss_group_set=c(8,10),
+                      lfc_set=c(1, 1.5))
 ```
 
 ## Power evaluation with simFromParam() 
@@ -140,31 +143,31 @@ Unlike ``simFromData()`` which needs user to provide their own count matrix and 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
 data(quickParaGSE60424)
 result <- simFromParam(sim_param="IAD",   #Options for 'IAD','ASD' and 'IBD'
-                       n_sim = 2,DE_pct = 0.05,n_gene = 1000,
-                       ss_group_set = c(8, 10),lfc_set = c(1, 1.5),
-                       lfc_target = 0.5, fdr_thred = 0.1)
+                       n_sim=2,DE_pct=0.05,n_gene=1000,
+                       ss_group_set=c(8, 10),lfc_set=c(1, 1.5),
+                       lfc_target=0.5, fdr_thred=0.1)
 ```
 
 ## Power evaluation with quickPower() 
-``quickPower()`` runs faster than ``simFromData()`` and ``simFromPara()``. Users only need to choose which study they want to use for simulation in the ``data`` argument.
+``quickPower()`` runs even faster than ``simFromData()`` and ``simFromPara()``, as it outputs the pre-evaluated results directly. Users only need to choose which study result they want the program to output in the ``data`` argument.
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
 data(quickPowerGSE60424)
-quickPower<-quickPower(data = "IAD") ###Options include 'IAD', 'IBD', or 'ASD'.
+quickPower<-quickPower(data="IAD") ###Options include 'IAD', 'IBD', or 'ASD'.
 ```
 
 # Results 
-cypress computes power evaluation metrics for each experimental scenario defined in the function arguments, the results it generates include:
+cypress uses power evaluation metrics, for each experimental scenario, of the following:
 
 * Power: Statistical power.
 
-* TDR: The ratio of the number of true positives to the number of positive discoveries.
+* TDR: The ratio of the number of true positives to the number of significant discoveries.
 
-* FDC: The ratio of the number of false positives to the number of true positives.
+* FDC: The ratio of the number of false positives to the number of true positives, among significant discoveries.
 
 # Visualization
-Once users have obtained an S4 object with a list of power measurements using either ``simFromData``, ``simFromParam`` or ``quickPower()``, they can use functions in cypress to generate basic line plots.
-cypress provides three plotting functions: ``plotPower()``, ``plotTDR()`` and ``plotFDC()``, for figure generating.
+Once users have obtained an S4 object with a list of power measurements using either ``simFromData``, ``simFromParam`` or ``quickPower()``, they can use the following functions to generate basic line plots: ``plotPower()``, ``plotTDR()`` and ``plotFDC()``.
+
 
 ## Statistical power figure
 **``plotPower()``**: Generates 6 plots in a 2x3 panel. The illustration of each 
@@ -198,17 +201,18 @@ plotPower(simulation_results=quickPower,effect.size=1,sample_size=10 )
 ## True discovery rate (TDR) figure
 **``plotTDR()``**: Generates 4 plots in a 2x2 panel. The illustration of each plot from left to right and from up to bottom is as follow: 
 
-1: True discovery rate(TDR) by top-rank genes, each line represents cell type. 
+1: True discovery rate(TDR) by top-rank genes, each line represents one cell type. 
 TDR was calculated under the scenario of sample size to be fixed at 10 and effect size to be fixed at 1 if ``sample_size=10`` and ``effect.size=1``.
 
-2: True discovery rate(TDR) by top-rank genes, each line represents effect size. 
+2: True discovery rate(TDR) by top-rank genes, each line represents one effect size. 
 TDR was the average value across cell types and under the scenario of sample size to be fixed at 10 if ``sample_size=10``.
 
-3: True discovery rate(TDR) by top-rank genes, each line represents sample size. 
+3: True discovery rate(TDR) by top-rank genes, each line represents one sample size. 
 TDR was the average value across cell types and under the scenario of effect size to be fixed at 1 if ``effect.size=1``.
 
-4: True discovery rate(TDR) by effect size, each line represents sample size. 
+4: True discovery rate(TDR) by effect size, each line represents one sample size. 
 TDR was calculated under the scenario of top rank gene equals 350.
+
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
 ### plot TDR results
@@ -218,11 +222,12 @@ plotTDR(simulation_results=quickPower,effect.size=1,sample_size=10)
 ## False discovery cost (FDC) figure
 **``plotFDC()``**: Generates 2 plots in a 1x2 panel. The illustration of each plot from left to right is as follow: 
 
-1: False discovery cost(FDC) by effect size, each line represents cell type. 
+1: False discovery cost(FDC) by effect size, each line represents one cell type. 
 FDC was calculated under the scenario of sample size to be fixed at 10 if ``sample_size=10``.
 
-2: False discovery cost(FDC) by top effect size, each line represent sample size. 
+2: False discovery cost(FDC) by top effect size, each line represent one sample size. 
 FDC was the average value across cell types.
+
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
 ### plot FDC results

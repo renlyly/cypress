@@ -1,9 +1,6 @@
 ###### Below are function for user used
 
 
-
-
-
 simFromData<- function(INPUTdata = NULL, CT_index = NULL,CT_unk=FALSE,
                         n_sim = 3, n_gene = 30000, DE_pct = 0.05,
                         ss_group_set = c(10, 20, 50, 100),
@@ -12,6 +9,27 @@ simFromData<- function(INPUTdata = NULL, CT_index = NULL,CT_unk=FALSE,
 
   if (!is(INPUTdata, "SummarizedExperiment")) {
     stop("INPUTdata must be a SummarizedExperiment object.")
+  }
+
+  if (!is.null(CT_index) && !is.numeric(CT_index)) {
+    stop("CT_index must be numeric.")
+  }
+
+  if (!is.numeric(n_sim) || length(n_sim) != 1 || n_sim < 2) {
+    stop("n_sim must be a single numeric value and at least 2.")
+  }
+
+  if (!is.numeric(n_gene) || length(n_gene) != 1 || n_gene < 500) {
+    stop("n_gene must be a single numeric value and at least 500.")
+  }
+
+  if (!is.numeric(fdr_thred) || length(fdr_thred) != 1 || fdr_thred <= 0) {
+    stop("fdr_thred must be a single numeric value greater than 0.")
+  }
+
+
+  if (!is.numeric(lfc_target) || lfc_target < 0) {
+    stop("lfc_target must be a positive numeric value.")
   }
 
 
@@ -36,11 +54,16 @@ simFromParam<- function(n_sim = 3, n_gene = 30000, DE_pct = 0.05,
                          lfc_set = c(0, 0.5, 1, 1.5, 2),
                          sim_param="IAD",
                          lfc_target = 0.5, fdr_thred = 0.1){
-  if (!is.numeric(n_sim)) {
-    stop("n_sim must be a numeric value.")
+
+
+  if (!is.numeric(n_sim) || length(n_sim) != 1 || n_sim < 2) {
+    stop("n_sim must be a single numeric value and at least 2.")
   }
-  if (!is.numeric(n_gene)) {
-    stop("n_gene must be a numeric value.")
+  if (!is.numeric(n_gene) || length(n_gene) != 1 || n_gene < 500) {
+    stop("n_gene must be a single numeric value and at least 500.")
+  }
+  if (!is.numeric(fdr_thred) || length(fdr_thred) != 1 || fdr_thred <= 0) {
+    stop("fdr_thred must be a single numeric value and greater than 0.")
   }
 
 
@@ -85,6 +108,9 @@ simFromParam<- function(n_sim = 3, n_gene = 30000, DE_pct = 0.05,
   }
   return(power_short)
 }
+
+
+
 
 quickPower<- function(data="IAD"){
 

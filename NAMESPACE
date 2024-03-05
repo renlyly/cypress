@@ -5,10 +5,17 @@ export('plotFDC')
 export('plotPower')
 export('plotTDR')
 
-# exportClasses('est_out')
-# exportClasses('cypress_out')
+exportClasses("est_out")
+exportClasses("cypress_out")
+exportMethods("show")
+
+
+#  exportMethods("show", "cypress_out")
+# exportMethods("show", "est_out")
+
+
 # exportMethods('est_out')
-# exportMethods('cypress_out')
+# exportMethods("cypress_out")
 
 # importFrom('sirt','dirichlet.mle')
 import('sirt')
