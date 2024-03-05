@@ -60,6 +60,9 @@ The \code{cypress_out} class is a S4 class in the \pkg{cypress} package. This cl
   }
 }
 
+\value{
+  Class for cypress.
+}
 
 \author{
 Shilin Yu <sy597@georgetown.edu>
