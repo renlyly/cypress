@@ -11,7 +11,7 @@ License: GPL-2 | GPL-3
 Depends: R(>= 4.4.0) 
 Imports: stats, abind, sirt,  lubridate, MASS,  TOAST, e1071, tibble, 
   parallel, preprocessCore, SummarizedExperiment, TCA, PROPER, methods,dplyr, 
-  utils, RColorBrewer, Biobase, graphics, edgeR,  BiocParallel, checkmate
+  utils, RColorBrewer, Biobase, graphics, edgeR,  BiocParallel, checkmate,mvtnorm
 Suggests: knitr, rmarkdown,   MatrixGenerics, htmltools, RUnit, BiocGenerics, BiocManager
 Collate:  AllClasses.R  CIBERSORT.R csRNA_seq_sim.R cypress_design.R AllGenerics.R
  cypress_wrapper.R cypressEmbedded.R  metrics.R cypress-methods.R   PlotTDR.R
