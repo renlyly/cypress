@@ -1,16 +1,16 @@
 Package: cypress
 Type: Package
 Title: Cell-Type-Specific Power Assessment
-Version: 0.99.11
+Version: 0.99.12
 Date: 2024-03-19
 Authors@R: c(person("Shilin", "Yu", role = c("aut", "cre"),email = 
   "sy597@georgetown.edu",comment=c(ORCID="0000-0002-5494-1960")),
              person("Guanqun", "Meng", role = "aut",email = "gxm324@case.edu"),
              person("Wen", "Tang", role = "aut",email = "wxt175@case.edu"))
 License: GPL-2 | GPL-3   
-Depends: R(>= 4.3.0) 
+Depends: R(>= 4.4.0) 
 Imports: stats, abind, sirt,  lubridate, MASS,  TOAST, e1071, tibble, 
-  parallel, preprocessC4re, SummarizedExperiment, TCA, PROPER, methods,dplyr, 
+  parallel, preprocessCore, SummarizedExperiment, TCA, PROPER, methods,dplyr, 
   utils, RColorBrewer, Biobase, graphics, edgeR,  BiocParallel
 Suggests: knitr, rmarkdown,   MatrixGenerics, htmltools, RUnit, BiocGenerics, BiocManager
 Collate:  AllClasses.R  CIBERSORT.R csRNA_seq_sim.R cypress_design.R 
