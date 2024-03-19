@@ -1,5 +1,5 @@
 
-# License: http://cibersort.stanford.edu/CIBERSORT_License.txt
+## License: http://cibersort.stanford.edu/CIBERSORT_License.txt
 
 
 
@@ -20,7 +20,6 @@ CoreAlg <- function(X, y, absolute, abs_method){
   nusvm <- rep(0,svn_itor)
   corrv <- rep(0,svn_itor)
 
-  #do cibersort
   t <- 1
   while(t <= svn_itor) {
     weights <- t(out[[t]]$coefs) %*% out[[t]]$SV
@@ -33,17 +32,13 @@ CoreAlg <- function(X, y, absolute, abs_method){
     t <- t + 1
   }
 
-  #pick best model
   rmses <- nusvm
   mn <- which.min(rmses)
   model <- out[[mn]]
-  #get and normalize coefficients
   q <- t(model$coefs) %*% model$SV
   q[which(q<0)] <-0
   if(!absolute || abs_method == 'sig.score') w <- (q/sum(q))
-  #relative space (returns fractions)
   if(absolute && abs_method == 'no.sumto1') w <- q
-  #absolute space (returns scores)
   mix_rmse <- rmses[mn]
   mix_r <- corrv[mn]
   newList <- list("w" = w, "mix_rmse" = mix_rmse, "mix_r" = mix_r)
@@ -57,20 +52,18 @@ doPerm <- function(perm, X, Y, absolute, abs_method){
   dist <- matrix()
 
   while(itor <= perm){
-    #print(itor)
-
-    #random mixture
+    ## random mixture
     yr <- as.numeric(Ylist[sample(length(Ylist),dim(X)[1])])
 
-    #standardize mixture
+    ## standardize mixture
     yr <- (yr - mean(yr)) / sd(yr)
 
-    #run CIBERSORT core algorithm
+    ## run CIBERSORT core algorithm
     result <- CoreAlg(X, yr, absolute, abs_method)
 
     mix_r <- result$mix_r
 
-    #store correlation
+    ## store correlation
     if(itor == 1) {dist <- mix_r}
     else {dist <- rbind(dist, mix_r)}
 
@@ -92,33 +85,29 @@ CIBERSORT <- function(sig_matrix, mixture_file, perm, QN = TRUE, absolute,
   if(absolute && abs_method != 'no.sumto1' && abs_method != 'sig.score')
     stop("abs_method must be set to either 'sig.score' or 'no.sumto1'")
 
-  #read in data
   X<- sig_matrix
 
   Y <- tibble::rownames_to_column(mixture_file,var = "symbol")
-  #to prevent crashing on duplicated gene symbols, add unique numbers to name
+  ## to prevent crashing on duplicated gene symbols, add unique numbers to name
   dups <- dim(Y)[1] - length(unique(Y[,1]))
   if(dups > 0) {
     warning(dups," duplicated gene symbol(s) found in mixture file!",sep="")
     rownames(Y) <- make.names(Y[,1], unique=TRUE)
   }else {rownames(Y) <- Y[,1]}
   Y <- Y[,-1]
-  ###################################
   X <- data.matrix(X)
   Y <- data.matrix(Y)
 
-  #order
   X <- X[order(rownames(X)),]
   Y <- Y[order(rownames(Y)),]
 
-  P <- perm #number of permutations
+  P <- perm
 
-  #anti-log if max < 50 in mixture file
+  ## anti-log if max < 50 in mixture file
   if(max(Y) < 50) {Y <- 2^Y}
 
-  #quantile normalization of mixture file
-  # library(preprocessCore)
-  if(QN == TRUE){
+  ## quantile normalization of mixture file
+    if(QN == TRUE){
     tmpc <- colnames(Y)
     tmpr <- rownames(Y)
     Y <- preprocessCore::normalize.quantiles(Y)
@@ -126,11 +115,11 @@ CIBERSORT <- function(sig_matrix, mixture_file, perm, QN = TRUE, absolute,
     rownames(Y) <- tmpr
   }
 
-  #store original mixtures
+  ## store original mixtures
   Yorig <- Y
   Ymedian <- max(median(Yorig),1)
 
-  #intersect genes
+  ## intersect genes
   Xgns <- row.names(X)
   Ygns <- row.names(Y)
   YintX <- Ygns %in% Xgns
@@ -138,10 +127,10 @@ CIBERSORT <- function(sig_matrix, mixture_file, perm, QN = TRUE, absolute,
   XintY <- Xgns %in% row.names(Y)
   X <- X[XintY,]
 
-  #standardize sig matrix
+  ## standardize sig matrix
   X <- (X - mean(X)) / sd(as.vector(X))
 
-  #empirical null distribution of correlation coefficients
+  ## empirical null distribution of correlation coefficients
   if(P > 0) {nulldist <- sort(doPerm(P, X, Y, absolute, abs_method)$dist)}
 
   header <- c('Mixture',colnames(X),"P-value","Correlation","RMSE")
@@ -153,18 +142,17 @@ CIBERSORT <- function(sig_matrix, mixture_file, perm, QN = TRUE, absolute,
   mixtures <- dim(Y)[2]
   pval <- 9999
 
-  #iterate through mixtures
+  ## iterate through mixtures
   while(itor <= mixtures){
 
     y <- Y[,itor]
 
-    #standardize mixture
+    ## standardize mixture
     y <- (y - mean(y)) / sd(y)
 
-    #run SVR core algorithm
+    ## run SVR core algorithm
     result <- CoreAlg(X, y, absolute, abs_method)
 
-    #get results
     w <- result$w
     mix_r <- result$mix_r
     mix_rmse <- result$mix_rmse
@@ -173,10 +161,10 @@ CIBERSORT <- function(sig_matrix, mixture_file, perm, QN = TRUE, absolute,
       w <- w * median(Y[,itor]) / Ymedian
     }
 
-    #calculate p-value
+    ## calculate p-value
     if(P > 0) {pval <- 1 -(which.min(abs(nulldist - mix_r)) / length(nulldist))}
 
-    #print output
+    ## print output
     out <- c(colnames(Y)[itor],w,pval,mix_r,mix_rmse)
     if(absolute) out <- c(out, sum(w))
     if(itor == 1) {output <- out}
@@ -187,7 +175,7 @@ CIBERSORT <- function(sig_matrix, mixture_file, perm, QN = TRUE, absolute,
   }
 
 
-  #return matrix object containing all results
+  ## return matrix object containing all results
   obj <- rbind(header,output)
   obj <- obj[,-1]
   obj <- obj[-1,]

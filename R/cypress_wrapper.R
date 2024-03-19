@@ -5,7 +5,6 @@
 # 'lfc_target': target effect size, should be greater than or equal to 0.
 # The absolute LFC lower than this values will be treated as None-DEGs.
 # Default to 0.5
-#
 # 'fdr_thred': adjusted p value threshold, should not below 0 or exceed 1.
 #
 # Returns:
@@ -28,44 +27,15 @@
 # 'ct_FDC_bio_smry': Cell type specific target FDC for all scenarios.
 #
 # 'FDC_bio_smry': Target FDC for all scenarios averaged across cell types.
-#######################################################
 
-# simulation_results <- cypress_wrapper(exp_design,
-#                                       lfc_target = 0.5, fdr_thred = 0.1)
-# simulation_results
-# simulation_results@ct_TDR_bio_smry
-# simulation_results@TDR_bio_smry
-# simulation_results@ct_PWR_bio_smry
-# simulation_results@PWR_bio_smry
-# simulation_results@PWR_strata_bio_smry
-# simulation_results@ct_FDC_bio_smry
-# simulation_results@FDC_bio_smry
 
 
 cypress_wrapper <- function(exp_design,
                             lfc_target, fdr_thred){
-  # 'top_g': Not an option for users. seq(50, 600, by = 100)
-  # 'lfc_sd': Not an option for users. Effect size standard deviation.Set to 0.5
-  # extract parameters from the design.
+
   # simulation setting
   if(!(lfc_target >= 0)) stop("Target LFC should be non-negative")
   if(fdr_thred < 0 || fdr_thred > 1) stop("FDR threshold should be between 0 and 1")
-
-  # scenarios <- exp_design@scenarios
-  # n_scenarios <- exp_design@n_scenarios
-  # ncell_type <- exp_design@ncell_type
-  # DE_pct <- exp_design@DE_pct
-  # n_sim <- exp_design@n_sim
-  # n_gene <- exp_design@n_gene
-  # n_strata <- exp_design@n_strata
-  # # distribution parameter
-  # health_lmean_m <- exp_design@health_lmean_m
-  # health_lmean_d <- exp_design@health_lmean_d
-  # lod_m <- exp_design@lod_m
-  # lod_d <- exp_design@lod_d
-  # # proportion parameter
-  # health_alpha <- exp_design@health_alpha
-  # case_alpha <- exp_design@case_alpha
 
   scenarios <- slot(exp_design, "scenarios")
   n_scenarios <- slot(exp_design, "n_scenarios")
@@ -82,9 +52,6 @@ cypress_wrapper <- function(exp_design,
   # proportion parameter
   health_alpha <- slot(exp_design, "health_alpha")
   case_alpha <- slot(exp_design, "case_alpha")
-
-
-
 
   ct_TDR_bio_smry <- NULL
   TDR_bio_smry <- NULL

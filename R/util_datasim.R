@@ -129,5 +129,3 @@ gt_organizer <- function(RNAseq_final_count, lfc_ct_mtx, ncell_type){
                  right = TRUE, labels = c(seq_len(9))))
   return(gene_CT_DE_connect)
 }
-
-# cut(rnorm(1000,0,100),)

@@ -1,8 +1,8 @@
-###Functions below are used to implement TOAST.
-###The first function is to run TOAST model.
-###The following two functions are to organize TOAST outputs, which are lists.
-###The last function was used as lapply input for the second function, which
-###serves as summarization purposes.
+## Functions below are used to implement TOAST.
+## The first function is to run TOAST model.
+## The following two functions are to organize TOAST outputs, which are lists.
+## The last function was used as lapply input for the second function, which
+## serves as summarization purposes.
 run_TOAST <- function(nsample_each_group,est_CT_prop,RNAseq_final_count) {
   ncell_type <- ncol(est_CT_prop)
   sim_design <- as.data.frame(factor(rep(c(1,2),nsample_each_group)))

@@ -6,13 +6,8 @@ plotTDR<-function(simulation_results,effect.size=1,sample_size=10){
     stop("sample_size must be a numeric value greater than 5.")
   }
 
-
-
-
   ss <- unique(slot(simulation_results, "FDC_bio_smry")$ss)
   lfc_mean <- unique(slot(simulation_results, "FDC_bio_smry")$lfc)
-  # ss<-unique(simulation_results@TDR_bio_smry$ss)
-  # lfc_mean<-unique(simulation_results@TDR_bio_smry$lfc)
 
   if(!(sample_size %in% ss)) stop("Sample size should be one of your design sample size set.")
   if(!(effect.size %in% lfc_mean)) stop("Effect size should be one of your design effect size set.")
@@ -21,14 +16,11 @@ plotTDR<-function(simulation_results,effect.size=1,sample_size=10){
 
   ct_n <- length(unique(slot(simulation_results, "ct_TDR_bio_smry")$ct))
   ct_smry_tmp <- slot(simulation_results, "ct_TDR_bio_smry")
-  # ct_n<-length(unique(simulation_results@ct_TDR_bio_smry$ct))
-  # ct_smry_tmp<-simulation_results@ct_TDR_bio_smry
 
   ct_smry<-ct_smry_tmp[which(ct_smry_tmp$ss==sample_size&ct_smry_tmp$lfc==effect.size ),seq_along(top_rank)]
   ct_smry<-t(ct_smry)
 
   TDR_smry <- slot(simulation_results, "TDR_bio_smry")
-  # TDR_smry<-simulation_results@TDR_bio_smry
 
   ef_smry_tmp<-TDR_smry[which(TDR_smry$ss==sample_size),seq_along(top_rank)]
   ef_smry<-t(ef_smry_tmp)

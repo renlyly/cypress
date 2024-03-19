@@ -40,6 +40,9 @@ est_out<-setClass("est_out",slots = c(health_alpha = "numeric",
 )
 )
 
+
+
+
 setValidity("cypress_out", function(object) {
   msg <- NULL
   slotNames <- c("ct_TDR_bio_smry", "TDR_bio_smry", "ct_PWR_bio_smry", "PWR_bio_smry",

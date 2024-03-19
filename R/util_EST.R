@@ -166,8 +166,7 @@ cypress_prop_trim<- function(final_count,lower_prop=0.05,
                              upper_prop=0.95,lower_d=NULL){
 
 quantile1 <- quantile(as.matrix(final_count), probs = c(lower_prop, upper_prop))
-# Rowfilter <- which(apply(final_count, 1, function(x)
-# all(x < min(quantile1[[2]], 100000 ) & x > max(quantile1[[1]], 0 ) ) ) )
+
   Rowfilter <- which(apply(final_count, 1,
                            function(x) all(x < min(quantile1[[2]], 100000 )  ) ) )
   Rowfilter1<-findRefinx(as.matrix(final_count),
@@ -232,15 +231,11 @@ result<-est_out(health_alpha = health_alpha$alpha,case_alpha = case_alpha$alpha,
 
 # read S4 to list
 S4tolist<-function(INPUT = NULL, CT_index = NULL,CT_unk= FALSE ){
-  # check input
   if (is.null(INPUT) || !inherits(INPUT, "SummarizedExperiment")) {
     stop("'INPUT' must be a SummarizedExperiment object")
   }
-  # Count_matrix
   Count_matrix <- assay(INPUT)
-  # design
   design <- colData(INPUT)$disease
-  # sample_CT_prop
     if (CT_unk) {
       sample_CT_prop <- NULL
     } else {
@@ -255,7 +250,6 @@ S4tolist<-function(INPUT = NULL, CT_index = NULL,CT_unk= FALSE ){
         sample_CT_prop <- as.matrix(sample_CT_prop)
       }
     }
-  #  ncell_type
   ncell_type <- NULL
     if (CT_unk) {
       if (is.numeric(CT_index) && length(CT_index) == 1) {
@@ -273,8 +267,6 @@ S4tolist<-function(INPUT = NULL, CT_index = NULL,CT_unk= FALSE ){
                 sample_CT_prop = sample_CT_prop, ncell_type = ncell_type))
 
  }
-
-
 
 
 cypress_est <- function(INPUT = NULL, CT_index = NULL,CT_unk= FALSE ) {
