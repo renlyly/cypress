@@ -37,21 +37,21 @@ cypress_wrapper <- function(exp_design,
   if(!(lfc_target >= 0)) stop("Target LFC should be non-negative")
   if(fdr_thred < 0 || fdr_thred > 1) stop("FDR threshold should be between 0 and 1")
 
-  scenarios <- slot(exp_design, "scenarios")
-  n_scenarios <- slot(exp_design, "n_scenarios")
-  ncell_type <- slot(exp_design, "ncell_type")
-  DE_pct <- slot(exp_design, "DE_pct")
-  n_sim <- slot(exp_design, "n_sim")
-  n_gene <- slot(exp_design, "n_gene")
-  n_strata <- slot(exp_design, "n_strata")
+  scenarios <- getcypress(exp_design, "scenarios")
+  n_scenarios <- getcypress(exp_design, "n_scenarios")
+  ncell_type <- getcypress(exp_design, "ncell_type")
+  DE_pct <- getcypress(exp_design, "DE_pct")
+  n_sim <- getcypress(exp_design, "n_sim")
+  n_gene <- getcypress(exp_design, "n_gene")
+  n_strata <- getcypress(exp_design, "n_strata")
   # distribution parameter
-  health_lmean_m <- slot(exp_design, "health_lmean_m")
-  health_lmean_d <- slot(exp_design, "health_lmean_d")
-  lod_m <- slot(exp_design, "lod_m")
-  lod_d <- slot(exp_design, "lod_d")
+  health_lmean_m <- getcypress(exp_design, "health_lmean_m")
+  health_lmean_d <- getcypress(exp_design, "health_lmean_d")
+  lod_m <- getcypress(exp_design, "lod_m")
+  lod_d <- getcypress(exp_design, "lod_d")
   # proportion parameter
-  health_alpha <- slot(exp_design, "health_alpha")
-  case_alpha <- slot(exp_design, "case_alpha")
+  health_alpha <- getcypress(exp_design, "health_alpha")
+  case_alpha <- getcypress(exp_design, "case_alpha")
 
   ct_TDR_bio_smry <- NULL
   TDR_bio_smry <- NULL

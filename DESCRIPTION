@@ -1,7 +1,7 @@
 Package: cypress
 Type: Package
 Title: Cell-Type-Specific Power Assessment
-Version: 0.99.13
+Version: 0.99.14
 Date: 2024-03-19
 Authors@R: c(person("Shilin", "Yu", role = c("aut", "cre"),email = 
   "sy597@georgetown.edu",comment=c(ORCID="0000-0002-5494-1960")),
@@ -11,10 +11,10 @@ License: GPL-2 | GPL-3
 Depends: R(>= 4.4.0) 
 Imports: stats, abind, sirt,  lubridate, MASS,  TOAST, e1071, tibble, 
   parallel, preprocessCore, SummarizedExperiment, TCA, PROPER, methods,dplyr, 
-  utils, RColorBrewer, Biobase, graphics, edgeR,  BiocParallel
+  utils, RColorBrewer, Biobase, graphics, edgeR,  BiocParallel, checkmate
 Suggests: knitr, rmarkdown,   MatrixGenerics, htmltools, RUnit, BiocGenerics, BiocManager
-Collate:  AllClasses.R  CIBERSORT.R csRNA_seq_sim.R cypress_design.R 
- cypress_wrapper.R cypressEmbedded.R  metrics.R show-methods.R   PlotTDR.R
+Collate:  AllClasses.R  CIBERSORT.R csRNA_seq_sim.R cypress_design.R AllGenerics.R
+ cypress_wrapper.R cypressEmbedded.R  metrics.R cypress-methods.R   PlotTDR.R
   TOAST_implement.R user.R util_datasim.R util_EST.R PlotFDC.R PlotPower.R 
 biocViews: Software, GeneExpression, DataImport, RNASeq, Sequencing
 Description: CYPRESS is an Cell Type specific power tool. This package aims to 

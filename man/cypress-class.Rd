@@ -4,20 +4,13 @@
 \alias{AllClasses}
 \alias{est_out-class}
 \alias{cypress_out-class}
-\alias{show,cypress_out-method}
-\alias{show,est_out-method}
+
 
 \title{
 Classes for cypress Package
 }
 \description{
 The \code{cypress_out} and \code{est_out} classes are custom S4 classes in the \pkg{cypress} package. both classes are designed as a comprehensive container for various types of analysis results.
-}
-
-\section{Methods}{
-  \describe{
-    \item{\code{show}}{Method to print the \code{cypress_out} or \code{est_out} object.}
-  }
 }
 
 

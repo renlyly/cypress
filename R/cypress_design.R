@@ -49,12 +49,12 @@ cypress_design <- function(n_sim, n_gene, DE_pct,
   n_strata <- length(exp_strata)-1
   # mean and var/cov of distribution mean
 
-  health_lmean_m <- slot(sim_param, "health_lmean_m")
-  health_lmean_d <- slot(sim_param, "health_lmean_d")
-  lod_m <- slot(sim_param, "lod_m")
-  lod_d <- slot(sim_param, "lod_d")
-  health_alpha <- slot(sim_param, "health_alpha")
-  case_alpha <- slot(sim_param, "case_alpha")
+  health_lmean_m <- getcypress(sim_param, "health_lmean_m")
+  health_lmean_d <- getcypress(sim_param, "health_lmean_d")
+  lod_m <- getcypress(sim_param, "lod_m")
+  lod_d <- getcypress(sim_param, "lod_d")
+  health_alpha <- getcypress(sim_param, "health_alpha")
+  case_alpha <- getcypress(sim_param, "case_alpha")
 
 
 

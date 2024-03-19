@@ -35,7 +35,7 @@ simFromData<- function(INPUTdata = NULL, CT_index = NULL,CT_unk=FALSE,
 
   estimate_all <- cypress_est(INPUTdata,CT_index,CT_unk)
 
-  K <- ncol(slot(estimate_all, "sample_CT_prop"))
+  K <- ncol(getcypress(estimate_all, "sample_CT_prop"))
   power_long <-cypressEmbedded(n_sim = n_sim, n_gene = n_gene, DE_pct = DE_pct,
                              ncell_type = K, ss_group_set = ss_group_set,
                              lfc_set = lfc_set,
@@ -71,7 +71,7 @@ simFromParam<- function(n_sim = 3, n_gene = 30000, DE_pct = 0.05,
     GSE60424_param <- NULL
     data(list = 'quickParaGSE60424', envir = environment())
 
-    K <- ncol(slot(GSE60424_param, "health_lmean_d"))
+    K <- ncol(getcypress(GSE60424_param, "health_lmean_d"))
     power_short<- cypressEmbedded(n_sim = n_sim, n_gene = n_gene, DE_pct = DE_pct,
                                 ncell_type = K, ss_group_set = ss_group_set,
                                 lfc_set = lfc_set,
@@ -80,7 +80,7 @@ simFromParam<- function(n_sim = 3, n_gene = 30000, DE_pct = 0.05,
   } else if (sim_param == "IBD") {
     ibd_prop_param <- NULL
     data(list = 'quickParaIBD', envir = environment())
-    K <- ncol(slot(ibd_prop_param, "health_lmean_d"))
+    K <- ncol(getcypress(ibd_prop_param, "health_lmean_d"))
     power_short<- cypressEmbedded(n_sim = n_sim, n_gene = n_gene, DE_pct = DE_pct,
                                 ncell_type = K, ss_group_set = ss_group_set,
                                 lfc_set = lfc_set,
@@ -90,7 +90,7 @@ simFromParam<- function(n_sim = 3, n_gene = 30000, DE_pct = 0.05,
    else if (sim_param == "ASD") {
       asd_noprop_param <- NULL
       data(list = 'quickParaASD', envir = environment())
-      K <- ncol(slot(asd_noprop_param, "health_lmean_d"))
+      K <- ncol(getcypress(asd_noprop_param, "health_lmean_d"))
       power_short <-cypressEmbedded(n_sim = n_sim, n_gene = n_gene, DE_pct = DE_pct,
                                   ncell_type = K, ss_group_set = ss_group_set,
                                   lfc_set = lfc_set,

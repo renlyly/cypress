@@ -8,18 +8,11 @@ export('plotTDR')
 exportClasses("est_out")
 exportClasses("cypress_out")
 exportMethods("show")
+export(setcypress)
+export(getcypress)
+exportMethods(getcypress, setcypress)
 
-
-#  exportMethods("show", "cypress_out")
-# exportMethods("show", "est_out")
-
-
-# exportMethods('est_out')
-# exportMethods("cypress_out")
-
-# importFrom('sirt','dirichlet.mle')
 import('sirt')
-#import('gtools')
 import('lubridate')
 importFrom('MASS',"mvrnorm")
 import('dplyr')
@@ -39,8 +32,8 @@ import('PROPER')
 import('edgeR')
 # importFrom("stats", "cov")
 import("methods")
-#import("stats")
-importFrom("methods", "new")
+importFrom("methods", "new","validObject", "slot","slotNames","setGeneric")
+importFrom("checkmate", "assertString")
 importFrom("stats", "cor", "median", "quantile", "rgamma", "rnorm", "rpois", "sd","cov")
 importFrom("utils", "head","data")
 importFrom("Biobase", "exprs")
@@ -49,3 +42,8 @@ importFrom("Biobase", "exprs")
 # imply dependencies
 importFrom('RColorBrewer','brewer.pal')
 importFrom('graphics','matplot','axis','legend','par')
+
+
+
+
+
