@@ -130,7 +130,7 @@ cypress offers 3 functions for simulation and power evaluation: ``simFromData()`
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
 data(ASD_prop_se)
-result <- simFromData(INPUTdata=ASD_prop,  #User can provide their own designed SE object
+result1 <- simFromData(INPUTdata=ASD_prop,  
                       CT_index=(seq_len(6)+2), CT_unk=FALSE,
                       n_sim=2,n_gene=1000,DE_pct=0.05,
                       ss_group_set=c(8,10),
@@ -143,8 +143,8 @@ Unlike ``simFromData()`` which needs user to provide their own count matrix and 
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
 data(quickParaGSE60424)
-result <- simFromParam(sim_param="IAD",   #Options for 'IAD','ASD' and 'IBD'
-                       n_sim=2,DE_pct=0.05,n_gene=1000,
+result2 <- simFromParam(sim_param="IAD",   #Options for 'IAD','ASD' and 'IBD'
+                       n_sim=2,DE_pct=0.05,n_gene=100,
                        ss_group_set=c(8, 10),lfc_set=c(1, 1.5),
                        lfc_target=0.5, fdr_thred=0.1)
 ```

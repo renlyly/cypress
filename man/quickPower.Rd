@@ -29,10 +29,11 @@ datasets: (IAD, IBD, and ASD). The obtained results can be used to create
 plots from plot functions.}
 
 \details{
-{IAD: }{whole transcriptome signatures of 6 immune cell subsets. The
-patients were drawn from subjects with a range of immune-related diseases.}\cr
-{IBD: }{Inflammatory Bowel Disease}\cr
-{ASD: }{Autism Spectrum Disorder.}\cr
+  \itemize{
+    \item \\{IAD:\\} Whole transcriptome signatures of 6 immune cell subsets. The patients were drawn from subjects with a range of immune-related diseases.
+    \item \\{IBD:\\} Inflammatory Bowel Disease
+    \item \\{ASD:\\} Autism Spectrum Disorder.
+  }
 }
 
 

@@ -48,10 +48,11 @@ This function conducts simulations with various user-defined study design
 parameters, including but not limited to sample size, and log fold change.)
 }
 \details{
-{GSE60424: }{whole transcriptome signatures of 6 immune cell subsets.The
-patients were drawn from subjects with a range of immune-related diseases.}\cr
-{IBD: }{Inflammatory Bowel Disease}\cr
-{ASD: }{Autism Spectrum Disorder}\cr
+  \itemize{
+    \item \\{GSE60424:\\} Whole transcriptome signatures of 6 immune cell subsets. The patients were drawn from subjects with a range of immune-related diseases.
+    \item \\{IBD:\\} Inflammatory Bowel Disease
+    \item \\{ASD:\\} Autism Spectrum Disorder
+  }
 }
 \examples{
 data(quickParaGSE60424)
