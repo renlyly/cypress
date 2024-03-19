@@ -42,7 +42,7 @@ To use the cypress package, users have the option to provide their own bulk-leve
 # Installation 
 
 From Bioconductor:
-```{r, eval=TRUE, warning=FALSE, message=FALSE}
+```{r, eval=FALSE, warning=FALSE, message=FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE)) {
     install.packages("BiocManager")
 }
@@ -51,7 +51,7 @@ BiocManager::install("cypress")
 
 To view the package vignette in HTML format, run the following lines in R:
 
-```{r eval=TRUE,warning=FALSE,message=FALSE}
+```{r eval=FALSE,warning=FALSE,message=FALSE}
 library(cypress)
 vignette("cypress")
 ```

@@ -1,8 +1,8 @@
 Package: cypress
 Type: Package
 Title: Cell-Type-Specific Power Assessment
-Version: 0.99.9
-Date: 2024-03-05
+Version: 0.99.10
+Date: 2024-03-20
 Authors@R: c(person("Shilin", "Yu", role = c("aut", "cre"),email = 
   "sy597@georgetown.edu",comment=c(ORCID="0000-0002-5494-1960")),
              person("Guanqun", "Meng", role = "aut",email = "gxm324@case.edu"),
