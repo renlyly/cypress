@@ -30,9 +30,9 @@ plots from plot functions.}
 
 \details{
   \itemize{
-    \item \\{IAD:\\} Whole transcriptome signatures of 6 immune cell subsets. The patients were drawn from subjects with a range of immune-related diseases.
-    \item \\{IBD:\\} Inflammatory Bowel Disease
-    \item \\{ASD:\\} Autism Spectrum Disorder.
+    \item \code{IAD:} Whole transcriptome signatures of 6 immune cell subsets. The patients were drawn from subjects with a range of immune-related diseases.
+    \item \code{IBD:} Inflammatory Bowel Disease
+    \item \code{ASD:} Autism Spectrum Disorder.
   }
 }
 

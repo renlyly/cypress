@@ -49,9 +49,9 @@ parameters, including but not limited to sample size, and log fold change.)
 }
 \details{
   \itemize{
-    \item \\{GSE60424:\\} Whole transcriptome signatures of 6 immune cell subsets. The patients were drawn from subjects with a range of immune-related diseases.
-    \item \\{IBD:\\} Inflammatory Bowel Disease
-    \item \\{ASD:\\} Autism Spectrum Disorder
+    \item \code{GSE60424:} Whole transcriptome signatures of 6 immune cell subsets. The patients were drawn from subjects with a range of immune-related diseases.
+    \item \code{IBD:} Inflammatory Bowel Disease
+    \item \code{ASD:} Autism Spectrum Disorder.
   }
 }
 \examples{

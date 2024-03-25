@@ -3,10 +3,6 @@ Changes in version 0.99.0 (2024-01-15)
 
 * Submitted to Bioconductor
 
-Changes in version 0.99.1 (2024-02-05)
-
-* debug for error and warning
-
 Changes in version 0.99.3 (2024-02-12)
 
 * debug for warning
@@ -14,4 +10,8 @@ Changes in version 0.99.3 (2024-02-12)
 Changes in version 0.99.15 (2024-03-19)
 
 * Unit test added.
+* Coding modified in compliance with BioC requirement.
+
+Changes in version 0.99.16 (2024-03-25)
+
 * Coding modified in compliance with BioC requirement.

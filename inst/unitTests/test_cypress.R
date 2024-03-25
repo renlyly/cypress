@@ -5,14 +5,15 @@ test_quickPower <- function() {
   set.seed(123)
   Quick_power <- quickPower(data = "IAD")
 
-  checkEquals(ncol(Quick_power@ct_TDR_bio_smry),10)
-  checkEquals(ncol(Quick_power@TDR_bio_smry), 9)
-  checkEquals(ncol(Quick_power@ct_PWR_bio_smry), 9)
-  checkEquals(ncol(Quick_power@PWR_bio_smry), 4)
-  checkEquals(ncol(Quick_power@PWR_strata_bio_smry), 12)
-  checkEquals(ncol(Quick_power@PWR_strata_ct_bio_smry), 13)
-  checkEquals(ncol(Quick_power@ct_FDC_bio_smry), 9)
-  checkEquals(ncol(Quick_power@FDC_bio_smry), 4)
+  checkEquals(ncol(getcypress(Quick_power, "ct_TDR_bio_smry")), 10)
+  checkEquals(ncol(getcypress(Quick_power, "TDR_bio_smry")), 9)
+  checkEquals(ncol(getcypress(Quick_power, "ct_PWR_bio_smry")), 9)
+  checkEquals(ncol(getcypress(Quick_power, "PWR_bio_smry")), 4)
+  checkEquals(ncol(getcypress(Quick_power, "PWR_strata_bio_smry")), 12)
+  checkEquals(ncol(getcypress(Quick_power, "PWR_strata_ct_bio_smry")), 13)
+  checkEquals(ncol(getcypress(Quick_power, "ct_FDC_bio_smry")), 9)
+  checkEquals(ncol(getcypress(Quick_power, "FDC_bio_smry")), 4)
+
 
 
   p1 <- plotPower(Quick_power,sample_size=10)

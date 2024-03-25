@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 <!-- badges: end -->
-CYPRESS is an Cell Type specific power tool. This package aims to 
+CYPRESS is a Cell Type specific power tool. This package aims to 
   perform power analysis for the cell type-specific data. It calculates FDR, 
   FDC,and power, under various study design parameters, including but not
   limited to sample size, and effect size.  
@@ -27,5 +27,5 @@ You can install the development version of cypress from [GitHub](https://github.
 
 ```
 
-``cypress`` is going to upload for Bioconductor.
+``cypress`` is under review from Bioconductor.
 
