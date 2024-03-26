@@ -61,6 +61,7 @@ cypress offers the function ``simFromData`` when users want to provide their own
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
 library(cypress)
+library(BiocParallel)
 data(ASD_prop_se)
 result1 <- simFromData(INPUTdata=ASD_prop, #SummarizedExperiment object.
                       CT_index=(seq_len(6) + 2), #Column index for cell types proportion matrix.
@@ -69,7 +70,8 @@ result1 <- simFromData(INPUTdata=ASD_prop, #SummarizedExperiment object.
                       n_gene=1000,  #Total number of genetic features users with to conduct.
                       DE_pct=0.05, #Percentage of DEG on each cell type.
                       ss_group_set=c(8,10), #Sample sizes per group users wish to simulate.
-                      lfc_set=c(1,1.5)) #Effect sizes users wish to simulate.
+                      lfc_set=c(1,1.5) #Effect sizes users wish to simulate
+                      )
 ```
 
 Alternatively, the ``simFromData`` function needs to provide real data, ``quickPower()`` outputs power calculation results without the need to input pilot RNA-seq data. This function is designed to provide quick access to pre-calculated results.

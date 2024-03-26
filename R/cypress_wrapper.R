@@ -31,7 +31,7 @@
 
 
 cypress_wrapper <- function(exp_design,
-                            lfc_target, fdr_thred){
+                            lfc_target, fdr_thred,BPPARAM=bpparam()){
 
   # simulation setting
   if(!(lfc_target >= 0)) stop("Target LFC should be non-negative")
@@ -78,7 +78,7 @@ cypress_wrapper <- function(exp_design,
                               n_gene,DE_pct,ncell_type,lfc_mean,lfc_sd,
                               health_lmean_m,health_lmean_d,lod_m,lod_d,
                               nsample_each_group,lfc_target,fdr_thred,top_g,
-                              health_alpha,case_alpha,n_strata)
+                              health_alpha,case_alpha,n_strata,BPPARAM=BPPARAM)
     # cell type specific target TDR
     ct_TDR_bio <- lapply(csRNA_results, function(x) x$ct_TDR_bio)
     ct_TDR_bio <- abind(ct_TDR_bio, along = 3)

@@ -5,7 +5,7 @@ simFromData<- function(INPUTdata = NULL, CT_index = NULL,CT_unk=FALSE,
                         n_sim = 3, n_gene = 30000, DE_pct = 0.05,
                         ss_group_set = c(10, 20, 50, 100),
                         lfc_set = c(0, 0.5, 1, 1.5, 2),
-                        lfc_target = 0.5, fdr_thred = 0.1){
+                        lfc_target = 0.5, fdr_thred = 0.1,BPPARAM=bpparam()){
 
   if (!is(INPUTdata, "SummarizedExperiment")) {
     stop("INPUTdata must be a SummarizedExperiment object.")
@@ -40,7 +40,8 @@ simFromData<- function(INPUTdata = NULL, CT_index = NULL,CT_unk=FALSE,
                              ncell_type = K, ss_group_set = ss_group_set,
                              lfc_set = lfc_set,
                              sim_param = estimate_all,
-                             lfc_target = lfc_target, fdr_thred = fdr_thred)
+                             lfc_target = lfc_target, fdr_thred = fdr_thred,
+                            BPPARAM=BPPARAM)
 
   return(power_long)
 }
@@ -50,8 +51,8 @@ simFromData<- function(INPUTdata = NULL, CT_index = NULL,CT_unk=FALSE,
 simFromParam<- function(n_sim = 3, n_gene = 30000, DE_pct = 0.05,
                          ss_group_set = c(10, 20, 50, 100),
                          lfc_set = c(0, 0.5, 1, 1.5, 2),
-                         sim_param="IAD",
-                         lfc_target = 0.5, fdr_thred = 0.1){
+                         sim_param="IAD",lfc_target = 0.5, fdr_thred = 0.1,
+                        BPPARAM=bpparam()){
 
 
   if (!is.numeric(n_sim) || length(n_sim) != 1 || n_sim < 2) {
@@ -76,7 +77,8 @@ simFromParam<- function(n_sim = 3, n_gene = 30000, DE_pct = 0.05,
                                 ncell_type = K, ss_group_set = ss_group_set,
                                 lfc_set = lfc_set,
                                 sim_param = GSE60424_param,
-                                lfc_target = lfc_target, fdr_thred = fdr_thred)
+                                lfc_target = lfc_target, fdr_thred = fdr_thred,
+                                BPPARAM=BPPARAM)
   } else if (sim_param == "IBD") {
     ibd_prop_param <- NULL
     data(list = 'quickParaIBD', envir = environment())
@@ -85,7 +87,8 @@ simFromParam<- function(n_sim = 3, n_gene = 30000, DE_pct = 0.05,
                                 ncell_type = K, ss_group_set = ss_group_set,
                                 lfc_set = lfc_set,
                                 sim_param = ibd_prop_param,
-                                lfc_target = lfc_target, fdr_thred = fdr_thred)
+                                lfc_target = lfc_target, fdr_thred = fdr_thred,
+                                BPPARAM=BPPARAM)
   }
    else if (sim_param == "ASD") {
       asd_noprop_param <- NULL
@@ -95,7 +98,8 @@ simFromParam<- function(n_sim = 3, n_gene = 30000, DE_pct = 0.05,
                                   ncell_type = K, ss_group_set = ss_group_set,
                                   lfc_set = lfc_set,
                                   sim_param = asd_noprop_param,
-                                  lfc_target = lfc_target, fdr_thred = fdr_thred)
+                                  lfc_target = lfc_target, fdr_thred = fdr_thred,
+                                  BPPARAM=BPPARAM)
 
   }
   else {
