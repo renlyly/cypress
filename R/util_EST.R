@@ -234,8 +234,8 @@ S4tolist<-function(INPUT = NULL, CT_index = NULL,CT_unk= FALSE ){
   if (is.null(INPUT) || !inherits(INPUT, "SummarizedExperiment")) {
     stop("'INPUT' must be a SummarizedExperiment object")
   }
-  Count_matrix <- assay(INPUT)
-  design <- colData(INPUT)$disease
+  Count_matrix <- SummarizedExperiment::assay(INPUT)
+  design <- SummarizedExperiment::colData(INPUT)$disease
     if (CT_unk) {
       sample_CT_prop <- NULL
     } else {

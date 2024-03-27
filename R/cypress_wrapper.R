@@ -74,7 +74,7 @@ cypress_wrapper <- function(exp_design,
       lfc_sd = lfc_sd
     )
     # Implement simulation
-   csRNA_results <- bplapply(seq_len(n_sim),csRNA_seq_sim,
+   csRNA_results <- BiocParallel::bplapply(seq_len(n_sim),csRNA_seq_sim,
                               n_gene,DE_pct,ncell_type,lfc_mean,lfc_sd,
                               health_lmean_m,health_lmean_d,lod_m,lod_d,
                               nsample_each_group,lfc_target,fdr_thred,top_g,

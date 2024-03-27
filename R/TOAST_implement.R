@@ -7,10 +7,10 @@ run_TOAST <- function(nsample_each_group,est_CT_prop,RNAseq_final_count) {
   ncell_type <- ncol(est_CT_prop)
   sim_design <- as.data.frame(factor(rep(c(1,2),nsample_each_group)))
   colnames(sim_design) <- "disease"
-  sim_Design_out <- makeDesign(sim_design,est_CT_prop)
-  sim_fitted_model_strata <- fitModel(sim_Design_out,
+  sim_Design_out <- TOAST::makeDesign(sim_design,est_CT_prop)
+  sim_fitted_model_strata <- TOAST::fitModel(sim_Design_out,
                                       as.matrix(RNAseq_final_count))
-  sim_res_TOAST_strata <- csTest(sim_fitted_model_strata, coef = "disease",
+  sim_res_TOAST_strata <- TOAST::csTest(sim_fitted_model_strata, coef = "disease",
                                  cell_type = NULL, verbose = FALSE, sort = TRUE)
   return(sim_res_TOAST_strata)
 }
